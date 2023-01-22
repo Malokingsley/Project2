@@ -11,4 +11,4 @@ Welcome to MusiqSea, the magical world of music is right at your finger tips wit
 sign up for MusiqSea today to start your voyage into the melody.
 
 
-![Alt text](/Users/malo/Downloads/Song info  string.png)
+![Screenshot](/Users/malo/Downloads/Song info string.png)
