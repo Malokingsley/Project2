@@ -19,4 +19,4 @@ Tech used
 - axiom
 - LiquidJS
 
-![alt text](Images/Untitled-2.jpg)
+![alt text-larger](Images/Untitled-2.jpg)
