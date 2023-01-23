@@ -13,10 +13,20 @@ sign up for MusiqSea today to start your voyage into the melody.
 Tech used
 
 - JS
+- Html
+- LiquidJS
+- JSON
 - mongoDB
 - mongoose
-- Html
 - axiom
-- LiquidJS
+- spotify's API
 
-![alt text-larger](Images/Untitled-2.jpg)
+![alt text](Images/Untitled-2.jpg)
+
+![alt text](Images/Untitled-2.jpg)
+
+![alt text](Images/Untitled-3.jpg)
+
+![alt text](Images/Untitled-4.jpg)
+
+![alt text](Images/Untitled-5.jpg)
