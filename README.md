@@ -21,7 +21,7 @@ Tech used
 - axiom
 - Last.fm's API
 
-![alt text](Images/Untitled-2.jpg)
+![alt text](Images/Untitled-8.jpg)
 
 ![alt text](Images/Untitled-2.jpg)
 
@@ -30,3 +30,7 @@ Tech used
 ![alt text](Images/Untitled-4.jpg)
 
 ![alt text](Images/Untitled-5.jpg)
+
+![alt text](Images/Untitled-6.jpg)
+
+![alt text](Images/Untitled-7.jpg)
