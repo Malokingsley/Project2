@@ -1,0 +1,32 @@
+{% block content %}
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand">Examplr</a>
+      {% if loggedIn %}
+        <a href="/songs/mine" class="nav-link text-light me-3">Hello {{ username }}
+        </a>
+      {% endif %}
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {% if loggedIn %}
+          <a href="/songs" class="nav-link text-light me-3">View All</a>
+          <a href="/songs/new" class="nav-link text-light me-3">New</a>
+          <a href="/songs/mine" class="nav-link text-light me-3">My Songs</a>
+          <a href="/auth/logout" class="nav-link text-light me-3">Log Out</a>
+        {% else %}
+          <a href="/auth/signup" class="nav-link text-light me-3">Sign Up</a>
+          <a href="/auth/login" class="nav-link text-light me-3">Sign In</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
