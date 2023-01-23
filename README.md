@@ -11,4 +11,4 @@ Welcome to MusiqSea, the magical world of music is right at your finger tips wit
 sign up for MusiqSea today to start your voyage into the melody.
 
 
-![First Image] (Images/Untitled-2.jpg)
+![alt text](Images/Untitled-2.jpg)
