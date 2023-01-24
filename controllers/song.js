@@ -79,6 +79,7 @@ router.get('/:id/edit', (req, res) => {
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
 		})
+
 })
 
 // update route
