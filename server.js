@@ -23,6 +23,7 @@ middleware(app)
 
 app.use('/auth', UserRouter)
 app.use('/songs', SongRouter)
+app.use('/users', UserRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session

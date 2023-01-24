@@ -1,7 +1,6 @@
 // Import Dependencies
 const express = require('express')
 const Song = require('../models/song')
-
 // Create router
 const router = express.Router()
 
