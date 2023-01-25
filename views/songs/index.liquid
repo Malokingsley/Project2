@@ -4,17 +4,12 @@
     <h2 class="display-6">All Songs</h2>
     <div class="row">
       {% for song in songs %}
-        {% const songProfile =
-         title: {{ song.title}},
-         artist: {{ song.artist}},
-         albumName: {{ song.albumName}},
-         relaseDate: {{ song.relaseDate}} %}
-      {% endfor %}
+    
       {% if song.fav == true %}
         {% assign songProfile = songProfile %}
       {% endif %}
 
-      <div class="card" style="width: 18rem;">4
+      <div class="card" style="width: 18rem;">
         <h5 class="card-header">{{ song.title }}</h5>
         <div class="card-body">
           <h5 class="card-title">
@@ -32,12 +27,12 @@
 
           </a>
 
-          <form action="/fav/{{song.id}}"method="POST">
+          <form action="/fav/{{ song.id}}"method="POST">
 
             <input
               type="submit"
               class="btn btn-danger"
-              value="Add to fav {{song.name}}">
+              value="Add to fav {{ song.name}}">
           </form>
 
 
