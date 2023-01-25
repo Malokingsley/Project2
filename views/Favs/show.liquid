@@ -1,0 +1,31 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+  <div>
+    <h2 class="display-6">All Songs</h2>
+    <div class="row">
+      {% for song in songs %}
+        <div class="card" style="width: 18rem;">
+          <h5 class="card-header">{{ song.title }}</h5>
+          <div class="card-body">
+            <h5 class="card-title">
+              Title: {{ song.title }}
+            </h5>
+            <p class="card-text">
+              Artist: {{ song.artist }}
+            </p>
+            <p class="card-text">
+              Album: {{ song.albumName }}
+            </p>
+            <a href="/songs/{{ song.id }}" class="btn btn-info">
+              View Song info
+
+
+            </a>
+
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

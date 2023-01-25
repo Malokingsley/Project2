@@ -1,32 +1,25 @@
 // import dependencies
 const mongoose = require('../utils/connection')
-const favsSchema = require('./fav')
-
 
 // import user model for populate
 const User = require('./user')
 
 // destructure the schema and model constructors from mongoose
-const { Schema, model } = mongoose
+const { Schema } = mongoose
 
-const MusiqSchema = new Schema(
+const favsSchema = new Schema(
 	{
-		title: { type: String,},
-		artist: { type: String,},
-        albumName: { type: String},
-		releaseDate: { type: String},
+		addToFav: {Boolean},
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
-		},
-		fav:[favsSchema]
+		}
 	},
 	{ timestamps: true }
 )
 
-const Song = model('Song', MusiqSchema)
 
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
-module.exports = Song
+module.exports = favsSchema
