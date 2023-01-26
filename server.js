@@ -25,11 +25,11 @@ middleware(app)
 app.use('/auth', UserRouter)
 app.use('/songs', SongRouter)
 app.use('/users', UserRouter)
-app.use('/fav', FavRouter )
+app.use('/faves', FavRouter )
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session
-	res.render('index.liquid', { loggedIn, username, userId })
+	res.render('home.liquid', { loggedIn, username, userId })
 })
 
 app.get('/error', (req, res) => {

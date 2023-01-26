@@ -1,6 +1,6 @@
 // Import Dependencies
 const express = require('express')
-const Fav = require('../models/fav')
+const Fave = require('../models/fav')
 const Song = require('../models/song')
 /////////////////////////////////////
 //// Create Router               ////
@@ -15,6 +15,24 @@ const router = express.Router()
 
 // This also means, that when we make a subdocument, we must MUST refer to the parent so that mongoose knows where in mongodb to store this subdocument
 
+// index for user favorites 
+// similar to my songs index but with faves 
+// render from the path faves/index 
+
+router.get('/', (req,res) => {
+    const { username, userId, loggedIn } = req.session
+	Fave.find({ owner: userId })
+        .populate('song')
+		.then(songs => {
+            console.log(songs)
+            res.render('favs/index', { songs, username, loggedIn })
+            // res.redirect('/faves')
+		})
+		.catch(error => {
+			res.redirect(`/error?error=${error}`)
+		})
+
+})
 // POST -> `/comments/<someFruitId>`
 // only loggedin users can post comments
 // bc we have to refer to a song, we'll do that in the simplest way via the route
@@ -28,28 +46,14 @@ router.post('/:songID', (req, res) => {
     if (req.session.loggedIn) {
         // if logged in, make the logged in user the author of the comment
         // this is exactly like how we added the owner to our songs
-        req.body.owner = req.session.userId
         // saves the req.body to a variable for easy reference later
-        const theComment = req.body
         // find a specific song
-        Song.findById(songID)
-            .then(song => {
-                // create the comment(with a req.body)
-               //song.fav.push(theComment)
-               console.log('this is', song)
-               
-               theComment.fav = true
-               console.log(theComment)
-               
+        Fave.create({song: songID, owner: req.session.userId })
 
-               console.log(songID)
-                // save the song
-                return song.save()
-            })
             // respond with a 201 and the song itself
             .then(song => {
                 // res.status(201).json({ song: song })
-                res.redirect(`/songs/mine`)
+                res.redirect(`/faves`)
             })
             // catch and handle any errors
             .catch(err => {
@@ -59,7 +63,7 @@ router.post('/:songID', (req, res) => {
             })
     } else {
         // res.sendStatus(401) //send a 401-unauthorized
-        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20fruit`)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20song`)
     }
 })
 
@@ -69,19 +73,19 @@ router.delete('/delete/:songID/:commId', (req, res) => {
     // isolate the ids and save to variables so we don't have to keep typing req.params
     // const songID = req.params.songID
     // const commId = req.params.commId
-    const { songID, commId } = req.params
+    const { songID, userId } = req.params
     // get the song
     Song.findById(songID)
         .then(song => {
             // get the comment, we'll use the built in subdoc method called .id()
-            const theComment = song.comments.id(commId)
-            console.log('this is the comment to be deleted: \n', theComment)
+            const theFavorite = song.fav.id(songId)
+            console.log('this is the comment to be deleted: \n', theFavorite)
             // then we want to make sure the user is loggedIn, and that they are the author of the comment
             if (req.session.loggedIn) {
                 // if they are the author, allow them to delete
-                if (theComment.author == req.session.userId) {
+                if (theFavorite.author == req.session.userId) {
                     // we can use another built in method - remove()
-                    theComment.remove()
+                    theFavorite.remove()
                     song.save()
                     // res.sendStatus(204) //send 204 no content
                     res.redirect(`/favs/${fav.id}`)

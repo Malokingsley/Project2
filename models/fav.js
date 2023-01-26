@@ -25,4 +25,4 @@ const Fave = model('Fave', favsSchema)
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
-module.exports = favsSchema
+module.exports = Fave
