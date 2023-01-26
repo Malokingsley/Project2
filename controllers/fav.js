@@ -23,9 +23,9 @@ router.get('/', (req,res) => {
     const { username, userId, loggedIn } = req.session
 	Fave.find({ owner: userId })
         .populate('song')
-		.then(songs => {
-            console.log(songs)
-            res.render('favs/index', { songs, username, loggedIn })
+		.then(faves => {
+            console.log(faves)
+            res.render('favs/index', { faves, username, loggedIn })
             // res.redirect('/faves')
 		})
 		.catch(error => {

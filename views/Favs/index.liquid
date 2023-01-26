@@ -5,18 +5,18 @@
     <div class="row">
       {% for fave in faves %}
         <div class="card" style="width: 18rem;">
-          <h5 class="card-header">{{ song.title }}</h5>
+          <h5 class="card-header">{{ fave.song.title }}</h5>
           <div class="card-body">
             <h5 class="card-title">
-              Title: {{ song.title }}
+              Title: {{ fave.song.title }}
             </h5>
             <p class="card-text">
-              Artist: {{ song.artist }}
+              Artist: {{ fave.song.artist }}
             </p>
             <p class="card-text">
-              Album: {{ song.albumName }}
+              Album: {{ fave.song.albumName }}
             </p>
-            <a href="/songs/{{ song.id }}" class="btn btn-info">
+            <a href="/songs/{{ faves.song.id }}" class="btn btn-info">
               View Song info
 
 
