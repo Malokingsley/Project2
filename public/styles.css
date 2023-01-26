@@ -1,7 +1,14 @@
 .images{
+    display: flex;
+    height:2500px;
+    width: 2000px;
+    flex-wrap:wrap;
     background-color: black;
-    justify-content:space-between;
-    position:center;
+    
 
+}
 
+html{
+
+    background-color: black;
 }

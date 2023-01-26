@@ -18,8 +18,7 @@ const MusiqSchema = new Schema(
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
-		},
-		fav:[favsSchema]
+		}
 	},
 	{ timestamps: true }
 )

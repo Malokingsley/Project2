@@ -85,15 +85,37 @@ router.get('/:id/edit', (req, res) => {
 // update route
 router.put('/:id', (req, res) => {
 	const songId = req.params.id
-	req.body.ready = req.body.ready === 'on' ? true : false
 
-	Song.findByIdAndUpdate(songId, req.body, { new: true })
-		.then(song => {
-			res.redirect(`/songs/${song.id}`)
-		})
-		.catch((error) => {
-			res.redirect(`/error?error=${error}`)
-		})
+	// Song.findByIdAndUpdate(songId, req.body, { new: true })
+	// 	.then(song => {
+	// 		res.redirect(`/songs/${song.id}`)
+	// 	})
+	// 	.catch((error) => {
+	// 		res.redirect(`/error?error=${error}`)
+	// 	})
+	Song.findById(id)
+        .then(song => {
+            // if the owner of the song is the person who is logged in
+            if (song.owner == req.session.userId) {
+                // send success message
+                // res.sendStatus(204)
+                // update and save the song
+                return song.updateOne(req.body)
+            } else {
+                // otherwise send a 401 unauthorized status
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20song`)
+            }
+        })
+        .then(() => {
+            
+            res.redirect(`/songs/mine`)
+        })
+        .catch(err => {
+            console.log(err)
+            // res.status(400).json(err)
+            res.redirect(`/error?error=${err}`)
+        })
 })
 
 // show route

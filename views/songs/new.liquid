@@ -12,7 +12,6 @@
           type="text"
           name="title"
           placeholder=" song title: "
-          value="{{ song.title }}"
           class="form-control">
 
 
@@ -21,24 +20,21 @@
           type="text"
           name="artist"
           placeholder=" artist: "
-          value="{{ song.artist }}"
           class="form-control">
 
         <label class="form-label">Album Name:</label>
         <input
           type="text"
-          name="albumname"
-          value="{{ song.albumName }}"
+          name="albumName"
           placeholder="Album Name"
           class="form-control">
 
 
         <label class="form-label">Release Date:</label>
         <input
-          type="date"
-          name="Release year"
-          value="{{ song.releaseDate }}"
-          placeholder="Release Date"
+          type="text"
+          name="releaseDate"
+          placeholder="Add realease year: ( ex:1982 )"
           class="form-control">
       </fieldset>
       <input

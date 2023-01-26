@@ -5,11 +5,14 @@ const mongoose = require('../utils/connection')
 const User = require('./user')
 
 // destructure the schema and model constructors from mongoose
-const { Schema } = mongoose
+const { Schema, model } = mongoose
 
 const favsSchema = new Schema(
 	{
-		addToFav: {Boolean},
+		song: {
+			type: Schema.Types.ObjectID,
+			ref: 'Song',
+		},
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
@@ -18,7 +21,7 @@ const favsSchema = new Schema(
 	{ timestamps: true }
 )
 
-
+const Fave = model('Fave', favsSchema)
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
