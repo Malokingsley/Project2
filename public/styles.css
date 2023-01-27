@@ -83,3 +83,11 @@ html{
 
     background-color: black;
 }
+
+figure {
+    position: relative;
+    display: block;
+    color: red;
+    padding-top: 40%;
+
+}
