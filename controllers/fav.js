@@ -24,7 +24,7 @@ router.get('/', (req,res) => {
 	Fave.find({ owner: userId })
         .populate('song')
 		.then(faves => {
-            console.log(faves)
+            // console.log(faves)
             res.render('favs/index', { faves, username, loggedIn })
             // res.redirect('/faves')
 		})
@@ -32,6 +32,49 @@ router.get('/', (req,res) => {
 			res.redirect(`/error?error=${error}`)
 		})
 
+})
+
+// DELETE -> `/comments/delete/<someFruitId>/<someCommentId>`
+// make sure only the author of the comment can delete the comment
+router.delete('/:faveID', (req, res) => {
+    // isolate the ids and save to variables so we don't have to keep typing req.params
+    // const songID = req.params.songID
+    console.log("DELETE ROUTE HIT")
+    // const commId = req.params.commId
+    const faveID  = req.params.faveID
+    // get the song
+    Fave.findById(faveID)
+        .then(fave => {
+            console.log('fave found')
+            // get the comment, we'll use the built in subdoc method called .id()
+            // then we want to make sure the user is loggedIn, and that they are the author of the comment
+            if (req.session.loggedIn) {
+                // if they are the author, allow them to delete
+                if (fave.owner == req.session.userId) {
+                    // we can use another built in method - remove()
+                    return fave.deleteOne()
+        
+                    // res.sendStatus(204) //send 204 no content
+                   // res.redirect(`/faves`)
+                } else {
+                    // otherwise send a 401 - unauthorized status
+                    // res.sendStatus(401)
+                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
+                }
+            } else {
+                // otherwise send a 401 - unauthorized status
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
+            }
+        })
+        .then(()=> {
+            res.redirect('/faves')
+        })
+        .catch(err => {
+            console.log(err)
+            // res.status(400).json(err)
+            res.redirect(`/error?error=${err}`)
+        })
 })
 // POST -> `/comments/<someFruitId>`
 // only loggedin users can post comments
@@ -67,45 +110,6 @@ router.post('/:songID', (req, res) => {
     }
 })
 
-// DELETE -> `/comments/delete/<someFruitId>/<someCommentId>`
-// make sure only the author of the comment can delete the comment
-router.delete('/delete/:songID/:commId', (req, res) => {
-    // isolate the ids and save to variables so we don't have to keep typing req.params
-    // const songID = req.params.songID
-    // const commId = req.params.commId
-    const { songID, userId } = req.params
-    // get the song
-    Song.findById(songID)
-        .then(song => {
-            // get the comment, we'll use the built in subdoc method called .id()
-            const theFavorite = song.fav.id(songId)
-            console.log('this is the comment to be deleted: \n', theFavorite)
-            // then we want to make sure the user is loggedIn, and that they are the author of the comment
-            if (req.session.loggedIn) {
-                // if they are the author, allow them to delete
-                if (theFavorite.author == req.session.userId) {
-                    // we can use another built in method - remove()
-                    theFavorite.remove()
-                    song.save()
-                    // res.sendStatus(204) //send 204 no content
-                    res.redirect(`/favs/${fav.id}`)
-                } else {
-                    // otherwise send a 401 - unauthorized status
-                    // res.sendStatus(401)
-                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
-                }
-            } else {
-                // otherwise send a 401 - unauthorized status
-                // res.sendStatus(401)
-                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            // res.status(400).json(err)
-            res.redirect(`/error?error=${err}`)
-        })
-})
 
 
 //////////////////////////////
