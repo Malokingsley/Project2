@@ -9,6 +9,17 @@
     
 
 }
+.search{
+    color: aquamarine;
+    padding-top: 37%;
+    padding-left:40%;
+    padding-bottom: 0px;
+
+
+
+}
+
+
 *{
     padding:0;
     margin:0;
@@ -34,7 +45,7 @@ body {
     box-shadow: 10px 25px 30px rgba(30,30,30);
 
 }
-.wrapper{
+.imageWrapper{
     width: 100%;
     height: 100%;
     display: flex;
@@ -84,10 +95,12 @@ html{
     background-color: black;
 }
 
+
 figure {
     position: relative;
     display: block;
     color: red;
-    padding-top: 40%;
+    padding-top: 4%;
+
 
 }

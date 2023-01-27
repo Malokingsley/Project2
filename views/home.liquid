@@ -2,10 +2,10 @@
 {% block content %}
 
   <h1 style="background-color: rgb(101, 11, 11); color:gold;">Welcome to MusiqSea</h1>
-  <body>
-    <h2>MusiqSea</h2>
+  <h2>MusiqSea</h2>
+    <body>
     <div class="container">
-      <div class="wrapper">
+      <div class=" imageWrapper">
         <img src="Images2/images-0.jpeg">
         <img src="/Images2/images-5.jpeg">
         <img src="/Images2/images-2.jpeg">
@@ -56,6 +56,14 @@
 
 
   </body>
+
+  <div class="search wrapper">
+    <button>Search</button>
+    <input type="search" id="search"placeholder="Music Search:">
+    </div>
+  {%if button == true %}
+  {%endif%}
+
   <figure>
     <figcaption>Listen to Music
     </figcaption>
