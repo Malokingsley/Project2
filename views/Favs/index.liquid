@@ -1,9 +1,13 @@
 {% layout 'layout.liquid' %}
 {% block content %}
   <div>
-    <h2 class="display-6">All Songs</h2>
+    <h2 class="display-6">Favorite Songs</h2>
     <div class="row">
+      {%if faves.length <= 0%}
+      <h3>you have no favorites</h3>
+      {%else%}
       {% for fave in faves %}
+        
         <div class="card" style="width: 18rem;">
           <h5 class="card-header">{{ fave.song.title }}</h5>
           <div class="card-body">
@@ -32,6 +36,7 @@
           </div>
         </div>
       {% endfor %}
+      {%endif%}
     </div>
   </div>
 {% endblock %}
