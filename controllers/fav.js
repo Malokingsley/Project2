@@ -11,7 +11,7 @@ const router = express.Router()
 //// Routes               ////
 //////////////////////////////
 // Subdocuments are not mongoose models. That means they don't have their own collection, and they don't come with the same model methods that we're used to(they have some their own built in.)
-// This also means, that a subdoc is never going to be viewed without it's parent document. We'll never see a comment without seeing the song it was commented on first.
+// This also means, that a subdoc is never going to be viewed without it's parent document. We'll never see a fave without seeing the song it was faveed on first.
 
 // This also means, that when we make a subdocument, we must MUST refer to the parent so that mongoose knows where in mongodb to store this subdocument
 
@@ -34,20 +34,19 @@ router.get('/', (req,res) => {
 
 })
 
-// DELETE -> `/comments/delete/<someFaveId>/<someCommentId>`
-// make sure only the author of the comment can delete the comment
+// DELETE -> `/faves/delete/<someFaveId>`
+// make sure only the author of the fave can delete the fave
 router.delete('/:faveID', (req, res) => {
     // isolate the ids and save to variables so we don't have to keep typing req.params
     // const songID = req.params.songID
     console.log("DELETE ROUTE HIT")
-    // const commId = req.params.commId
     const faveID  = req.params.faveID
     // get the song
     Fave.findById(faveID)
         .then(fave => {
             console.log('fave found')
-            // get the comment, we'll use the built in subdoc method called .id()
-            // then we want to make sure the user is loggedIn, and that they are the author of the comment
+            // get the fave, we'll use the built in subdoc method called .id()
+            // then we want to make sure the user is loggedIn, and that they are the author of the fave
             if (req.session.loggedIn) {
                 // if they are the author, allow them to delete
                 if (fave.owner == req.session.userId) {
@@ -59,12 +58,12 @@ router.delete('/:faveID', (req, res) => {
                 } else {
                     // otherwise send a 401 - unauthorized status
                     // res.sendStatus(401)
-                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
+                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20fave`)
                 }
             } else {
                 // otherwise send a 401 - unauthorized status
                 // res.sendStatus(401)
-                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20fave`)
             }
         })
         .then(()=> {
@@ -76,8 +75,8 @@ router.delete('/:faveID', (req, res) => {
             res.redirect(`/error?error=${err}`)
         })
 })
-// POST -> `/comments/<someFaveId>`
-// only loggedin users can post comments
+// POST -> `/faves/<someFaveId>`
+// only loggedin users can post faves
 // bc we have to refer to a song, we'll do that in the simplest way via the route
 router.post('/:songID', (req, res) => {
     // first we get the songID and save to a variable
@@ -87,7 +86,7 @@ router.post('/:songID', (req, res) => {
     // then we'll protect this route against non-logged in users
     console.log('this is the session\n', req.session)
     if (req.session.loggedIn) {
-        // if logged in, make the logged in user the author of the comment
+        // if logged in, make the logged in user the author of the fave
         // this is exactly like how we added the owner to our songs
         // saves the req.body to a variable for easy reference later
         // find a specific song
@@ -106,7 +105,7 @@ router.post('/:songID', (req, res) => {
             })
     } else {
         // res.sendStatus(401) //send a 401-unauthorized
-        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20song`)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20fave%20on%20this%20song`)
     }
 })
 

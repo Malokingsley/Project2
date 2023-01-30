@@ -6,7 +6,7 @@ const router = express.Router()
 
 // Router Middleware
 // Authorization middleware
-// If you have some resources that should be accessible to everyone regardless of loggedIn status, this middleware can be moved, commented out, or deleted. 
+// If you have some resources that should be accessible to everyone regardless of loggedIn status, this middleware can be moved, faveed out, or deleted. 
 router.use((req, res, next) => {
 	// checking the loggedIn boolean of our session
 	if (req.session.loggedIn) {
