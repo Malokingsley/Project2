@@ -34,7 +34,7 @@ router.get('/', (req,res) => {
 
 })
 
-// DELETE -> `/comments/delete/<someFruitId>/<someCommentId>`
+// DELETE -> `/comments/delete/<someFaveId>/<someCommentId>`
 // make sure only the author of the comment can delete the comment
 router.delete('/:faveID', (req, res) => {
     // isolate the ids and save to variables so we don't have to keep typing req.params
@@ -76,7 +76,7 @@ router.delete('/:faveID', (req, res) => {
             res.redirect(`/error?error=${err}`)
         })
 })
-// POST -> `/comments/<someFruitId>`
+// POST -> `/comments/<someFaveId>`
 // only loggedin users can post comments
 // bc we have to refer to a song, we'll do that in the simplest way via the route
 router.post('/:songID', (req, res) => {

@@ -40,7 +40,7 @@ db.on('open', () => {
     // this will delete any songs that are not owned by a user
     Song.deleteMany({})
         .then(() => {
-            // then we'll seed(create) our starter fruits
+            // then we'll seed(create) our starter songs
             Song.create(startSongs)
                 // tell our app what to do with success and failures
                 .then(data => {
