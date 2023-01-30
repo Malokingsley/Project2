@@ -38,9 +38,9 @@ db.on('open', () => {
     ]
     // then we delete every songs in the database(all instances of this resource)
     // this will delete any songs that are not owned by a user
-    Song.deleteMany({ owner: null })
+    Song.deleteMany({})
         .then(() => {
-            // then we'll seed(create) our starter fruits
+            // then we'll seed(create) our starter songs
             Song.create(startSongs)
                 // tell our app what to do with success and failures
                 .then(data => {

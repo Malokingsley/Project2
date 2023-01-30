@@ -6,6 +6,7 @@ const express = require("express")
 const middleware = require('./utils/middleware')
 const SongRouter = require('./controllers/song')
 const UserRouter = require('./controllers/user')
+const FavRouter = require('./controllers/fav')
 const User = require("./models/user")
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
 // user and resource routes linked in ./utils/middleware.js
@@ -24,10 +25,11 @@ middleware(app)
 app.use('/auth', UserRouter)
 app.use('/songs', SongRouter)
 app.use('/users', UserRouter)
+app.use('/faves', FavRouter )
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session
-	res.render('index.liquid', { loggedIn, username, userId })
+	res.render('home.liquid', { loggedIn, username, userId })
 })
 
 app.get('/error', (req, res) => {

@@ -1,7 +1,106 @@
-.images{
+.body.div {
+    display: flex;
+    height:500px;
+    width: 460px;
+    flex-direction:wrap;
     background-color: black;
-    justify-content:space-between;
-    position:center;
+    padding: 60px;
+    
+    
+
+}
+.search{
+    color: aquamarine;
+    padding-top: 37%;
+    padding-left:40%;
+    padding-bottom: 0px;
+
+
+
+}
+
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+body {
+    padding:0;
+    margin:0;
+    background-color:rgb(3, 3, 3);
+
+}
+.container{
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    transform:translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    
+    overflow: hidden;
+    border: 20px solid white;
+    border-radius: 8px; 
+    box-shadow: 10px 25px 30px rgba(30,30,30);
+
+}
+.imageWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    animation: slide 20s infinite ;
+
+
+}
+@keyframes slide{
+    0%{
+        transform: translateX(0);
+
+    }
+    25%{
+        transform: translateX(0);
+
+    }
+    30%{
+        transform: translateX(-100%);
+    }
+    50%{
+        transform: translateX(-100%);
+    }
+    55%{
+        transform: translateX(-200%);
+    }
+    75%{
+        transform: translateX(-200%);
+    }
+    80%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(-300%);
+    }
+ 
+}
+img{
+    width:100%;
+    height: 100%;
+    padding-right: 50px;
+
+}
+
+
+html{
+
+    background-color: black;
+}
+
+
+figure {
+    position: relative;
+    display: block;
+    color: red;
+    padding-top: 4%;
 
 
 }
